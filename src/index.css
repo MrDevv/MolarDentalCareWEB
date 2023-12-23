@@ -1,5 +1,7 @@
 :root{
   --main-font: "Poppins", sans-serif;
+  --main-bg-color: #0097B2;
+  --btn-bg-color: #00DAFF;
 }
 
 /* Globales */
@@ -13,4 +15,114 @@ html{
   box-sizing: inherit;
   margin: 0;    
   font-family: var(--main-font);
+}
+
+/* Login */
+.page-login{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(236, 236, 236);
+}
+
+.container-login{
+  display: flex;  
+  flex-wrap: wrap;
+  width: 80rem;
+  border-radius: 40px;  
+  overflow: hidden;
+  box-shadow: 0 5px 50px 1px #adadad;
+}
+
+.container-login .logo{  
+  background-color: #fff;
+  display: flex;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-login .logo img{
+  width: 30rem;
+}
+
+.container-login .formulario{
+  display: flex;
+  justify-content: center;
+  padding: 12rem 0;
+  flex: 1;
+  background-color: var(--main-bg-color);
+}
+
+.container-login .formulario form{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container-login .formulario span:first-child{
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.container-login .formulario span:nth-child(2){
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.container-login .formulario .input-user,
+.container-login .formulario .input-password{  
+  background-color: #fff;
+  padding: 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.container-login .formulario .input-user{  
+  margin-bottom: 1rem;  
+}
+
+.container-login .formulario .input-password{
+  margin-bottom: 3rem;
+}
+
+.container-login .formulario .input-user input,
+.container-login .formulario .input-password input{  
+  width: 25rem;
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.container-login .formulario input:focus-visible{
+  outline: none;
+}
+
+.container-login .formulario .input-user:focus-within,
+.container-login .formulario .input-password:focus-within{
+  border-bottom: 2px solid #000;
+}
+
+.container-login .formulario .input-user i,
+.container-login .formulario .input-password i{  
+  font-size: 1.2rem;  
+}
+
+.container-login .formulario .btn-login{
+  padding: 0.5rem 0;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  background-color: var(--btn-bg-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.container-login .formulario .btn-login:hover{
+  background-color: #fff;
 }
