@@ -2,6 +2,7 @@
   --main-font: "Poppins", sans-serif;
   --main-bg-color: #0097B2;
   --btn-bg-color: #00DAFF;
+  --page-bg-color: rgb(236, 236, 236)
 }
 
 /* Globales */
@@ -24,7 +25,7 @@ html{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(236, 236, 236);
+  background-color: var(--page-bg-color);
 }
 
 .container-login{
@@ -125,4 +126,62 @@ html{
 
 .container-login .formulario .btn-login:hover{
   background-color: #fff;
+}
+
+/* Dashboard */
+
+.container-dashboard{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--page-bg-color);
+}
+
+/* NavBar */
+
+.navBar-container{
+  padding: 1rem;
+  width: 25rem;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.navBar-container>div{      
+  cursor: pointer;  
+}
+
+.navBar-container .navBar_span{
+  font-weight: 500;
+  display: block;
+  color: #fff;  
+  padding: 2rem;
+  font-size: 1.2rem;
+  border-radius: 1rem;
+}
+
+.submenu{
+  display: grid;
+  grid-template-rows: 0fr;    
+  transition: all .3s ease-in-out;
+  padding-left: 1rem;
+}
+
+.options{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;  
+}
+
+.navBar_link{
+  padding: 2rem;
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.showOptions{
+  grid-template-rows: 1fr;
 }
