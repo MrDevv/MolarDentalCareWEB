@@ -140,25 +140,60 @@ html{
 /* NavBar */
 
 .navBar-container{
-  padding: 1rem;
   width: 25rem;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.navBar-container .logo{
+  width: 100%;
+  height: 13rem;
+  display: flex;
+  justify-content: center;  
+  overflow: hidden;
+}
+
+.navBar-container .logo img{
+  width: 95%;
+}
+
+.navBar-menu{
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  padding: 1rem;
+  width: 25rem;  
   height: 100%;
   background-color: var(--main-bg-color);
   display: flex;
   flex-direction: column;
 }
 
-.navBar-container>div{      
+.navBar-menu>div{      
   cursor: pointer;  
 }
 
-.navBar-container .navBar_span{
-  font-weight: 500;
-  display: block;
-  color: #fff;  
-  padding: 2rem;
+.navBar-link{
+  display: flex;  
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  border-radius: 1.5rem;  
+}
+
+.navBar-menu .navBar_span{  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;  
+  color: #fff;    
   font-size: 1.2rem;
-  border-radius: 1rem;
+  text-transform: uppercase;  
+}
+
+.navBar-link svg{
+  transition: all .3s ease-in-out;    
 }
 
 .submenu{
