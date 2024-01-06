@@ -8,9 +8,9 @@ export const ChildPacienteRoutes = [
   {
     path: "/paciente",
     element: <NuevoPaciente />,
-  },
-  {
-    path: "paciente/:id",
+  },  
+  {      
+    path: "paciente/:id",      
     element: <h1>Editar Paciente</h1>,
   },
 ];
