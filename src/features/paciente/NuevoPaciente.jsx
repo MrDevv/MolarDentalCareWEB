@@ -2,8 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Header } from "../../components/Header";
 
-export const NuevoPaciente = () => {  
-
+export const NuevoPaciente = () => {
   const [paciente, setPaciente] = useState({
     dni: "",
     apellidos: "",
@@ -15,22 +14,26 @@ export const NuevoPaciente = () => {
   });
 
   const consultarDNI = async (dni) => {
-    const {data} = await axios.get(
+    const { data } = await axios.get(
       `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFyaWVzXzI0MjAxNUBob3RtYWlsLmNvbSJ9.ld2MtZJxrio5psyaeVwdA3yDe9Xf6CaAQFjDqs4Ps9U`
     );
-    const {apellidoMaterno, apellidoPaterno, nombres, success} = data
+    const { apellidoMaterno, apellidoPaterno, nombres, success } = data;
 
     if (success) {
       setPaciente({
         ...paciente,
-        apellidos: apellidoMaterno + ' ' + apellidoPaterno,
-        nombres
-      })
+        apellidos: apellidoMaterno + " " + apellidoPaterno,
+        nombres,
+      });
+    } else {
+      console.log(
+        "Ocurrió un error al consultar los datos con el DNI ingresado"
+      );
     }
   };
 
   const onChangeValue = ({ target }) => {
-    const { name, value } = target;    
+    const { name, value } = target;
     setPaciente({
       ...paciente,
       [name]: value,
@@ -39,8 +42,13 @@ export const NuevoPaciente = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(paciente);
-  }
+
+    if (!validarCampos()) {
+      console.log(paciente);      
+    }else{
+      console.log('Campos incompletos');
+    }
+  };
 
   const onReset = () => {
     setPaciente({
@@ -51,12 +59,34 @@ export const NuevoPaciente = () => {
       telefono: "",
       correo: "",
       direccion: "",
-    })
-  }
+    });
+  };
+
+  const validarCampos = () => {
+    const {
+      dni,
+      apellidos,
+      nombres,
+      fechaDeNacimiento,
+      telefono,
+      correo,
+      direccion,
+    } = paciente;
+
+    return (
+      dni.length === 0 ||
+      apellidos.length === 0 ||
+      nombres.length === 0 ||
+      fechaDeNacimiento.length === 0 ||
+      telefono.length === 0 ||
+      correo.length === 0 ||
+      direccion.length === 0
+    );
+  };
 
   return (
     <div className="container-pages">
-      <Header title={'Registrar Paciente'}/>      
+      <Header title={"Registrar Paciente"} />
 
       <div className="container-form">
         <form className="form">
@@ -72,7 +102,9 @@ export const NuevoPaciente = () => {
                 value={paciente.dni}
                 autoComplete="off"
               />
-              <button type="button" onClick={() => consultarDNI(paciente.dni)}>Consultar Datos</button>
+              <button type="button" onClick={() => consultarDNI(paciente.dni)}>
+                Consultar Datos
+              </button>
             </div>
 
             <div className="apellidos">
@@ -151,8 +183,12 @@ export const NuevoPaciente = () => {
           <div className="line-white"></div>
 
           <div className="buttons">
-            <button onClick={onSubmit} type="submit">Registrar</button>
-            <button onClick={onReset} type="button">Cancelar</button>
+            <button onClick={onSubmit} type="submit">
+              Registrar
+            </button>
+            <button onClick={onReset} type="button">
+              Cancelar
+            </button>
           </div>
         </form>
       </div>
