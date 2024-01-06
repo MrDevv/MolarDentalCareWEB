@@ -28,6 +28,12 @@ export const NavBar = () => {
           />
         ))}
       </div>
+
+      <div className="logout">
+        <button>
+          <i className="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+        </button>
+      </div>
     </nav>
   );
 };
