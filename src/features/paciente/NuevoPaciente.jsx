@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Header } from "../../components/Header";
+import { consultarDatos } from "../../services/consultarNombresPorDni";
 
 export const NuevoPaciente = () => {
   const [paciente, setPaciente] = useState({
@@ -13,10 +13,9 @@ export const NuevoPaciente = () => {
     direccion: "",
   });
 
-  const consultarDNI = async (dni) => {
-    const { data } = await axios.get(
-      `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImFyaWVzXzI0MjAxNUBob3RtYWlsLmNvbSJ9.ld2MtZJxrio5psyaeVwdA3yDe9Xf6CaAQFjDqs4Ps9U`
-    );
+  const getNameByDni = async (dni) => {
+    const data = await consultarDatos(dni);
+
     const { apellidoMaterno, apellidoPaterno, nombres, success } = data;
 
     if (success) {
@@ -30,7 +29,7 @@ export const NuevoPaciente = () => {
         "Ocurrió un error al consultar los datos con el DNI ingresado"
       );
     }
-  };
+  }  
 
   const onChangeValue = ({ target }) => {
     const { name, value } = target;
@@ -102,7 +101,7 @@ export const NuevoPaciente = () => {
                 value={paciente.dni}
                 autoComplete="off"
               />
-              <button type="button" onClick={() => consultarDNI(paciente.dni)}>
+              <button type="button" onClick={() => getNameByDni(paciente.dni)}>
                 Consultar Datos
               </button>
             </div>
