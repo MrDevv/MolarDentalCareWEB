@@ -7,6 +7,7 @@ import {
 import { Login } from "../features/Login";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { ChildPacienteRoutes } from "./ChildPacienteRoutes";
+import { ChildOdontologoRoutes } from "./ChildOdontologoRoutes";
 
 const router = createBrowserRouter([
   {
@@ -44,20 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        children: [          
-          {
-            path: "/odontologos",
-            element: <h1>Odontologos Registrados</h1>,
-          },
-          {
-            path: "/odontologo",
-            element: <h1>Nuevo Odontologo</h1>,
-          },
-          {
-            path: "odontologo/:id",
-            element: <h1>Editar Odontologo</h1>,
-          },
-        ],
+        children: ChildOdontologoRoutes
       },
       {
         path: "/",
