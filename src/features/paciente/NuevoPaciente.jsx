@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Header } from "../../components/Header";
 import { consultarDatos } from "../../services/consultarNombresPorDni";
+import { useForm } from "../../hook/useForm";
 
 export const NuevoPaciente = () => {
-  const [paciente, setPaciente] = useState({
-    dni: "",
-    apellidos: "",
-    nombres: "",
-    fechaDeNacimiento: "",
-    telefono: "",
-    correo: "",
-    direccion: "",
-  });
+  const {user, setNombresByDni, onChangeValue, onReset, validarCampos} = useForm();
 
   const getNameByDni = async (dni) => {
     const data = await consultarDatos(dni);
@@ -19,11 +12,7 @@ export const NuevoPaciente = () => {
     const { apellidoMaterno, apellidoPaterno, nombres, success } = data;
 
     if (success) {
-      setPaciente({
-        ...paciente,
-        apellidos: apellidoMaterno + " " + apellidoPaterno,
-        nombres,
-      });
+      setNombresByDni(apellidoMaterno, apellidoPaterno, nombres)
     } else {
       console.log(
         "Ocurrió un error al consultar los datos con el DNI ingresado"
@@ -31,56 +20,14 @@ export const NuevoPaciente = () => {
     }
   }  
 
-  const onChangeValue = ({ target }) => {
-    const { name, value } = target;
-    setPaciente({
-      ...paciente,
-      [name]: value,
-    });
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (!validarCampos()) {
-      console.log(paciente);      
+      console.log(user);      
     }else{
       console.log('Campos incompletos');
     }
-  };
-
-  const onReset = () => {
-    setPaciente({
-      dni: "",
-      apellidos: "",
-      nombres: "",
-      fechaDeNacimiento: "",
-      telefono: "",
-      correo: "",
-      direccion: "",
-    });
-  };
-
-  const validarCampos = () => {
-    const {
-      dni,
-      apellidos,
-      nombres,
-      fechaDeNacimiento,
-      telefono,
-      correo,
-      direccion,
-    } = paciente;
-
-    return (
-      dni.length === 0 ||
-      apellidos.length === 0 ||
-      nombres.length === 0 ||
-      fechaDeNacimiento.length === 0 ||
-      telefono.length === 0 ||
-      correo.length === 0 ||
-      direccion.length === 0
-    );
   };
 
   return (
@@ -98,10 +45,10 @@ export const NuevoPaciente = () => {
                 name="dni"
                 type="text"
                 onChange={onChangeValue}
-                value={paciente.dni}
+                value={user.dni}
                 autoComplete="off"
               />
-              <button type="button" onClick={() => getNameByDni(paciente.dni)}>
+              <button type="button" onClick={() => getNameByDni(user.dni)}>
                 Consultar Datos
               </button>
             </div>
@@ -112,7 +59,7 @@ export const NuevoPaciente = () => {
                 type="text"
                 disabled
                 name="apellidos"
-                value={paciente.apellidos}
+                value={user.apellidos}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
@@ -124,7 +71,7 @@ export const NuevoPaciente = () => {
                 disabled
                 type="text"
                 name="nombres"
-                value={paciente.nombres}
+                value={user.nombres}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
@@ -135,7 +82,7 @@ export const NuevoPaciente = () => {
               <input
                 type="text"
                 name="fechaDeNacimiento"
-                value={paciente.fechaDeNacimiento}
+                value={user.fechaDeNacimiento}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
@@ -146,7 +93,7 @@ export const NuevoPaciente = () => {
               <input
                 type="text"
                 name="telefono"
-                value={paciente.telefono}
+                value={user.telefono}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
@@ -157,7 +104,7 @@ export const NuevoPaciente = () => {
               <input
                 type="text"
                 name="correo"
-                value={paciente.correo}
+                value={user.correo}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
@@ -168,7 +115,7 @@ export const NuevoPaciente = () => {
               <input
                 type="text"
                 name="direccion"
-                value={paciente.direccion}
+                value={user.direccion}
                 onChange={onChangeValue}
                 autoComplete="off"
               />
