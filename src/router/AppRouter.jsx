@@ -8,6 +8,7 @@ import { Login } from "../features/Login";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { ChildPacienteRoutes } from "./ChildPacienteRoutes";
 import { ChildOdontologoRoutes } from "./ChildOdontologoRoutes";
+import { ChildHorarioRoutes } from "./ChildHorarioRoutes";
 
 const router = createBrowserRouter([
   {
@@ -49,20 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        children: [          
-          {
-            path: "/horarios",
-            element: <h1>Horarios Registrados</h1>,
-          },
-          {
-            path: "/horario",
-            element: <h1>Nuevo Horario</h1>,
-          },
-          {
-            path: "/horario/:id",
-            element: <h1>Editar Horario</h1>,
-          },
-        ],
+        children: ChildHorarioRoutes,
       },
       {
         path: "/",

@@ -3,12 +3,30 @@ import { Header } from "../../components/Header";
 import { consultarDatos } from "../../services/consultarNombresPorDni";
 import { useForm } from "../../hook/useForm";
 import { Form } from "../../components/Form";
+import Swal from "sweetalert2";
 
 export const NuevoPaciente = () => {
-  const { user, setNombresByDni, onChangeValue, onReset, validarCampos } =
-    useForm();
+  const { formState, setNombresByDni, onChangeValue, onReset, isFormValid } =
+    useForm({
+        dni: "",
+        apellidos: "",
+        nombres: "",
+        fechaDeNacimiento: "",
+        telefono: "",
+        correo: "",
+        direccion: "",
+      });
 
   const getNameByDni = async (dni) => {
+    if (dni.length === 0) {
+      Swal.fire({
+        title: "Campo Incompleto",
+        text: "Ingrese un DNI",
+        icon: "warning"
+      });
+      return 
+    }
+
     const data = await consultarDatos(dni);
 
     const { apellidoMaterno, apellidoPaterno, nombres, success } = data;
@@ -16,19 +34,25 @@ export const NuevoPaciente = () => {
     if (success) {
       setNombresByDni(apellidoMaterno, apellidoPaterno, nombres);
     } else {
-      console.log(
-        "Ocurrió un error al consultar los datos con el DNI ingresado"
-      );
+      Swal.fire({
+        title: "Error",
+        text: "Ocurrió un error al buscar los datos con el DNI ingresado.",
+        icon: "error"
+      });
     }
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!validarCampos()) {
-      console.log(user);
+    if (isFormValid()) {
+      console.log(formState);
     } else {
-      console.log("Campos incompletos");
+      Swal.fire({
+        title: "Campos Incompletos",
+        text: "Por favor completar todos los campos.",
+        icon: "warning"
+      });
     }
   };
 
@@ -37,7 +61,7 @@ export const NuevoPaciente = () => {
       <Header title={"Registrar Paciente"} />
 
       <Form
-        user={user}
+        user={formState}
         onChangeValue={onChangeValue}
         getNameByDni={getNameByDni}
         onSubmit={onSubmit}
