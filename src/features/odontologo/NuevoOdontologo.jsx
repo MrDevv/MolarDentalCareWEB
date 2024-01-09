@@ -6,7 +6,7 @@ import { consultarDatos } from "../../services/consultarNombresPorDni";
 import Swal from "sweetalert2";
 
 export const NuevoOdontologo = () => {
-  const { formState, setNombresByDni, onChangeValue, onReset, isFormValid } =
+  const { formState, setNombresByDni, onChangeValue, onReset, isFormValid} =
     useForm({
       dni: "",
       apellidos: "",
