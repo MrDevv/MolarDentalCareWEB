@@ -9,6 +9,7 @@ import { DashboardRoutes } from "./DashboardRoutes";
 import { ChildPacienteRoutes } from "./ChildPacienteRoutes";
 import { ChildOdontologoRoutes } from "./ChildOdontologoRoutes";
 import { ChildHorarioRoutes } from "./ChildHorarioRoutes";
+import { ChildUsuarioRoutes } from "./ChildUsuarioRoutes";
 
 const router = createBrowserRouter([
   {
@@ -54,20 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        children: [          
-          {
-            path: "/usuarios",
-            element: <h1>Usuarios Registrados</h1>,
-          },
-          {
-            path: "/usuario",
-            element: <h1>Nuevo Usuario</h1>,
-          },
-          {
-            path: "usuario/:id",
-            element: <h1>Editar Usuario</h1>,
-          },
-        ],
+        children: ChildUsuarioRoutes,
       },   
       {
         path: "/",
