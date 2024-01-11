@@ -3,18 +3,18 @@ import { useState } from "react";
 export const useForm = (inititalForm) => {
   const [formState, setUser] = useState(inititalForm);
 
-  const onChangeValue = ({ target }) => {
-    const { name, value } = target;
+  const onChangeValue = ({ target }) => {    
+    const { name, value } = target;    
     setUser({
       ...formState,
       [name]: value,
-    });
+    });    
   };
 
   const setNombresByDni = (apellidoMaterno, apellidoPaterno, nombres) => {
     setUser({
         ...formState,
-        apellidos: apellidoMaterno + " " + apellidoPaterno,
+        apellidos: apellidoPaterno + " " + apellidoMaterno,
         nombres,
       });
   }

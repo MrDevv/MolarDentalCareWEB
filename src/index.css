@@ -374,3 +374,14 @@ html{
   background-color: #fff;
   color: var(--main-bg-color);
 }
+
+.form select {
+  width: 17rem;
+  text-align: center;
+  border: 1px solid var(--main-bg-color);
+}
+
+select:focus-visible {   
+  outline: none;
+  border-color: var(--main-bg-color);  
+}
