@@ -10,6 +10,8 @@ import { ChildPacienteRoutes } from "./ChildPacienteRoutes";
 import { ChildOdontologoRoutes } from "./ChildOdontologoRoutes";
 import { ChildHorarioRoutes } from "./ChildHorarioRoutes";
 import { ChildUsuarioRoutes } from "./ChildUsuarioRoutes";
+import { ChildPagoRoutes } from "./ChildPagoRoutes";
+import { ChildCitaRoutes } from "./ChildCitaRoutes";
 
 const router = createBrowserRouter([
   {
@@ -26,20 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        children: [          
-          {
-            path: "/citas",
-            element: <h1>Citas Registradas</h1>,
-          },
-          {
-            path: "/cita",
-            element: <h1>Nueva Cita</h1>,
-          },
-          {
-            path: "cita/:id",
-            element: <h1>Editar cita</h1>,
-          },
-        ],
+        children: ChildCitaRoutes,
       },
       {
         path: "/",
@@ -59,20 +48,7 @@ const router = createBrowserRouter([
       },   
       {
         path: "/",
-        children: [          
-          {
-            path: "/pagos",
-            element: <h1>Pagos Registrados</h1>,
-          },
-          {
-            path: "/pago",
-            element: <h1>Nuevo Pago</h1>,
-          },
-          {
-            path: "/pago/:id",
-            element: <h1>Editar Pago</h1>,
-          },
-        ],
+        children: ChildPagoRoutes,        
       },     
     ],
   },
