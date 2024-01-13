@@ -2,11 +2,14 @@ import React from "react";
 
 export const FormHorario = ({
   horario,
-  onChangeValue,  
+  onChangeValue,
   onSubmit,
   onReset,
-  getOdontologoByDni
+  getOdontologoByDni,
+  getHorariosValidos,
 }) => {
+  const { horariosInicio, horariosFin } = getHorariosValidos();
+
   return (
     <div className="container-form">
       <form className="form">
@@ -22,7 +25,10 @@ export const FormHorario = ({
               value={horario.dniOdontologo}
               autoComplete="off"
             />
-            <button type="button" onClick={() => getOdontologoByDni(horario.dniOdontologo)}>
+            <button
+              type="button"
+              onClick={() => getOdontologoByDni(horario.dniOdontologo)}
+            >
               Buscar
             </button>
           </div>
@@ -52,6 +58,23 @@ export const FormHorario = ({
           </div>
 
           <div>
+            <label htmlFor="">Hora Inicio</label>
+            <select
+              name="horaInicio"
+              id="horarioInicio"
+              onChange={onChangeValue}
+              value={horario.horaInicio}
+            >
+              <option value="">Seleccione una hora</option>
+              {horariosInicio.map((horaInicio) => (
+                <option key={horaInicio} value={horaInicio}>
+                  {horaInicio}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
             <label htmlFor="">Fecha</label>
             <input
               type="text"
@@ -63,25 +86,20 @@ export const FormHorario = ({
           </div>
 
           <div>
-            <label htmlFor="">Hora Inicio</label>
-            <input
-              type="text"
-              name="horaInicio"
-              value={horario.horaInicio}
-              onChange={onChangeValue}
-              autoComplete="off"
-            />
-          </div>
-
-          <div>
             <label htmlFor="">Hora Fin</label>
-            <input
-              type="text"
+            <select
               name="horaFin"
-              value={horario.horaFin}
+              id="horaFin"
               onChange={onChangeValue}
-              autoComplete="off"
-            />
+              value={horario.horaFin}
+            >
+              <option value="">Seleccione una hora</option>
+              {horariosFin.map((horaFin) => (
+                <option key={horaFin} value={horaFin}>
+                  {horaFin}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
